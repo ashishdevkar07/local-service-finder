@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 
 function Services() {
     const [providers, setProviders] = useState([
@@ -10,6 +11,8 @@ function Services() {
         { id: 6, name: "QuickFix Plumbing", category: "Plumber", rating: 4.2, price: 280 }
     ])
 
+    const navigate = useNavigate()
+
     return (
         <div>
             <h1>Available Services Providers</h1>
@@ -20,7 +23,7 @@ function Services() {
                         <p>Category : {provider.category}</p>
                         <p>Rating : {provider.rating}</p>
                         <p>Price : ₹{provider.price}/hour</p>
-                        <button>Book Now</button>
+                        <button onClick={() => navigate("/booking")}>Book Now</button>
                     </div>
                 ))}
             </div>
