@@ -1,0 +1,22 @@
+User fills Register form in React
+→ React sends POST request to /api/auth/register
+→ auth.js receives it
+→ checks if email exists
+→ hashes password
+→ saves to MongoDB
+→ sends success back
+→ React shows "Registration successful"
+
+User fills Login form
+→ React sends POST request to /api/auth/login
+→ auth.js finds user by email
+→ compares passwords
+→ creates JWT token
+→ sends token back
+→ React stores token, redirects to home
+
+User clicks Book Now
+→ React sends POST to /api/bookings
+→ bookings.js saves booking to MongoDB
+→ sends confirmation back
+→ React shows "Booking confirmed"
