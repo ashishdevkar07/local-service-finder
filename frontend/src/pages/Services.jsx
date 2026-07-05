@@ -1,28 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
+import API_URL from "../config"
+
 
 function Services() {
-    const [providers, setProviders] = useState([
-        { id: 1, name: "Ramesh Plumbing Workers", category: "Plumber", rating: 4.5, price: 300 },
-        { id: 2, name: "PowerFix Electricians", category: "Electrician", rating: 4.8, price: 400 },
-        { id: 3, name: "Sparkle Home Cleaning", category: "Cleaning", rating: 4.6, price: 250 },
-        { id: 4, name: "WoodCraft Carpentary", category: "Carpenter", rating: 4.7, price: 500 },
-        { id: 5, name: "ColorPro Painters", category: "Painting", rating: 4.7, price: 600 },
-        { id: 6, name: "QuickFix Plumbing", category: "Plumber", rating: 4.2, price: 280 }
-    ])
-
+    const [providers, setProviders] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState("")
     const navigate = useNavigate()
+
+    useEffect(() => {
+        fetch(`${API_URL}/providers`)
+            .then(res => res.json())
+            .then(data => {
+                setProviders(data)
+                setLoading(false)
+            })
+            .catch(err => {
+                setError("Failed to load providers")
+                setLoading(false)
+            })
+    }, [])
+
+    if (loading) return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Loading providers...</h2>
+    if (error) return <h2 style={{ textAlign: "center", color: "red", marginTop: "50px" }}>{error}</h2>
 
     return (
         <div>
-            <h1>Available Services Providers</h1>
+            <div style={{ textAlign: "center", padding: "30px 20px 10px" }}>
+                <h1 style={{ color: "#1F4E79", fontSize: "32px" }}>Available Service Providers</h1>
+                <p style={{ color: "#888", marginTop: "8px" }}>Choose from our verified professionals</p>
+            </div>
             <div className="provider-grid">
                 {providers.map((provider) => (
-                    <div className="provider-card" key={provider.id}>
+                    <div className="provider-card" key={provider._id}>
                         <h3>{provider.name}</h3>
-                        <p>Category : {provider.category}</p>
-                        <p>Rating : {provider.rating}</p>
-                        <p>Price : ₹{provider.price}/hour</p>
+                        <p>📂 Category: {provider.category}</p>
+                        <p>⭐ Rating: {provider.rating}</p>
+                        <p>💰 Price: ₹{provider.price}/hour</p>
+                        <p>📞 Phone: {provider.phone}</p>
+                        <p style={{ color: provider.available ? "#1abc9c" : "red" }}>
+                            {provider.available ? "✅ Available" : "❌ Not Available"}
+                        </p>
                         <button onClick={() => navigate("/booking")}>Book Now</button>
                     </div>
                 ))}

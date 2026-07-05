@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Booking from "./pages/Booking";
@@ -12,6 +12,16 @@ import Footer from "./components/Footer";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [username, setUsername] = useState("")
+
+    // Restore login state on refresh
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const savedUsername = localStorage.getItem("username")
+        if (token && savedUsername) {
+            setIsLoggedIn(true)
+            setUsername(savedUsername)
+        }
+    }, [])
 
     return (
         <BrowserRouter>

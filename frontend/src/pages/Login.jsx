@@ -1,53 +1,80 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import API_URL from "../config"
 
-function Login({setIsLoggedIn , setUsername}) {
-    //const [email, setEmail] = useState("")
-    const [username , setUsernameInput] = useState("")
+function Login({ setIsLoggedIn, setUsername }) {
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
     const navigate = useNavigate()
 
-    function handlelogin() {
-        if (username === "" || password === "") {
+    async function handlelogin() {
+        if (email === "" || password === "") {
             alert("Please fill all the fields")
             return
         }
-       setIsLoggedIn(true)
-       setUsername(username)
-       navigate("/home")
+        try {
+            setLoading(true)
+            setError("")
+
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                // save token to localStorage
+
+                /*
+                localStorage.setItem("token", data.token) — saves JWT token in browser storage so user stays logged in even after page refresh.
+                localStorage.setItem("username", data.user.name) — saves username for display in navbar.
+                Login now uses real email and password — not just any username.
+                */
+                localStorage.setItem("token", data.token)
+                localStorage.setItem("username", data.user.name)
+
+                setIsLoggedIn(true)
+                setUsername(data.user.name)
+                navigate("/home")
+            } else {
+                setError(data.message)
+            }
+        } catch (err) {
+            setError("Something went wrong. Please try again.")
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
         <div className="auth-form">
             <h1>Welcome Back</h1>
-            <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={username}
-                autoComplete="off"
-                onChange={(e) => setUsernameInput(e.target.value)}
-            />
 
-            {/* <input
+            {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
+
+            <input
                 type="email"
-                name="email"
                 placeholder="Email Address"
                 value={email}
-                autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
-            /> */}
+            />
 
             <input
                 type="password"
-                name="password"
                 placeholder="Password"
                 value={password}
-                autoComplete="off"
                 onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button onClick={handlelogin}>Login</button>
+            <button onClick={handlelogin} disabled={loading}>
+                {loading ? "Logging in..." : "Login"}
+                </button>
             <p>Don't have an account ? <span onClick={() => navigate("/register")} className="link">Register here</span></p>
         </div>
     )

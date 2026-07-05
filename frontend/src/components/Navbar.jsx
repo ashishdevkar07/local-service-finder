@@ -4,6 +4,8 @@ function Navbar({ isLoggedIn, username, setIsLoggedIn }) {
     const navigate = useNavigate()
 
     function handleLogout() {
+        localStorage.removeItem("token")
+        localStorage.removeItem("username")
         setIsLoggedIn(false)
         navigate("/")
     }
