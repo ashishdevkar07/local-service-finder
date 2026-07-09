@@ -15,7 +15,9 @@ const bookingSchema = new mongoose.Schema({
     serviceType: { type: String, required: true },
     date: { type: String, required: true },
     time: { type: String, required: true },
-    status: { type: String, default: "pending" }
+    status: { type: String, default: "pending" },
+    userEmail: { type: String, required: false },
+    israted: { type: Boolean, default: false }
 }, { timestamps: true })
 
 module.exports = mongoose.model("Booking", bookingSchema)
