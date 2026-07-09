@@ -8,6 +8,8 @@ import Register from "./pages/Register";
 import Landing from "./pages/Landing";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import BookingHistory from "./pages/BookingHistory";
+import Admin from "./pages/Admin";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -34,6 +36,8 @@ function App() {
                     <Route path="/booking" element={<Booking />} />
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/my-bookings" element={<BookingHistory />} />
+                    <Route path="/admin" element={<Admin />} />
                 </Routes>
             </main>
             <Footer />

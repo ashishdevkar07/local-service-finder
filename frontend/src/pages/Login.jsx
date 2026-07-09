@@ -38,6 +38,7 @@ function Login({ setIsLoggedIn, setUsername }) {
                 */
                 localStorage.setItem("token", data.token)
                 localStorage.setItem("username", data.user.name)
+                localStorage.setItem("userEmail",data.user.email)
 
                 setIsLoggedIn(true)
                 setUsername(data.user.name)

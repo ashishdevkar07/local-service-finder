@@ -21,6 +21,8 @@ function Navbar({ isLoggedIn, username, setIsLoggedIn }) {
                         <Link to="/home">Home</Link>
                         <Link to="/services">Services</Link>
                         <Link to="/booking">Booking</Link>
+                        <Link to="/my-bookings">My Bookings</Link>
+                        <Link to="/admin">Admin</Link>
                         <span className="nav-username">👤 {username}</span>
                         <button className="logout-btn" onClick={handleLogout}>Logout</button>
                     </>

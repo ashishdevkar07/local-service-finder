@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import API_URL from "../config"
-
+import StarRating from '../components/StarRating'
 
 function Services() {
     const [providers, setProviders] = useState([])
@@ -22,6 +22,14 @@ function Services() {
             })
     }, [])
 
+    function updateProviderRating(id, newRating) {
+        setProviders(providers.map(p =>
+            p._id === id ? { ...p, rating: newRating } : p
+        ))
+    }
+
+
+
     if (loading) return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Loading providers...</h2>
     if (error) return <h2 style={{ textAlign: "center", color: "red", marginTop: "50px" }}>{error}</h2>
 
@@ -36,7 +44,7 @@ function Services() {
                     <div className="provider-card" key={provider._id}>
                         <h3>{provider.name}</h3>
                         <p>📂 Category: {provider.category}</p>
-                        <p>⭐ Rating: {provider.rating}</p>
+                        <p>⭐ Rating:{provider.rating} ({provider.totalRatings} ratings)</p>
                         <p>💰 Price: ₹{provider.price}/hour</p>
                         <p>📞 Phone: {provider.phone}</p>
                         <p style={{ color: provider.available ? "#1abc9c" : "red" }}>

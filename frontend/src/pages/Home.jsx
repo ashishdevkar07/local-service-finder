@@ -19,10 +19,11 @@ function Home() {
             <div className="hero">
                 <h1>Find Trusted Local Services</h1>
                 <p>Book verified professionals for plumbing, electrical, cleaning and more - right at your doorstep.</p>
-                <button onClick={() => {
-                    console.log("button clicked")
-                    navigate("/services")
-                }}>Explore Services</button>
+                <div className="hero-buttons">
+                    <button className="btn-primary" onClick={() => navigate("/services")}>
+                        Explore Services
+                    </button>
+                </div>
             </div>
 
             {/* Categories Section */}
