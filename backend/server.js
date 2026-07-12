@@ -26,10 +26,12 @@ app.use(express.json())
 const authRoutes = require("./routes/auth")
 const providerRoutes = require("./routes/providers")
 const bookingRoutes = require("./routes/bookings")
+const servicemanRoutes = require("./routes/serviceman")
 
 app.use("/api/auth", authRoutes)
 app.use("/api/providers", providerRoutes)
 app.use("/api/bookings", bookingRoutes)
+app.use("/api/serviceman", servicemanRoutes)
 
 
 // Test route

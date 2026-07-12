@@ -36,7 +36,7 @@ router.put("/:id/status", async (req, res) => {
     try {
         const { status } = req.body
         const booking = await Booking.findByIdAndUpdate(
-            req.params,
+            req.params.id,
             { status },
             { new: true }
         )
