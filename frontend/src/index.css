@@ -608,3 +608,49 @@ footer {
     color: #6B5744;
     margin-bottom: 6px;
 }
+
+
+/* Landing Page  */
+.landing {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3E2723 0%, #6F4E37 60%, #C89B6D 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-content {
+    color: white;
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+}
+
+.landing-content h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.landing-content h1 span {
+    color: #C89B6D;
+}
+
+.landing-content p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.landing-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}

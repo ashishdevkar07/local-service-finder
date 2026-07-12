@@ -9,7 +9,11 @@ import Landing from "./pages/Landing";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BookingHistory from "./pages/BookingHistory";
+import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
+import ServicemanRegister from "./pages/ServicemanRegister";
+import ServicemanLogin from "./pages/ServicemanLogin";
+import ServicemanDashboard from "./pages/ServicemanDashboard";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -37,7 +41,11 @@ function App() {
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/my-bookings" element={<BookingHistory />} />
+                    <Route path="/admin-login" element={<AdminLogin />} />
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/serviceman-register" element={<ServicemanRegister />} />
+                    <Route path="/serviceman-login" element={<ServicemanLogin />} />
+                    <Route path="/serviceman-dashboard" element={<ServicemanDashboard />} />
                 </Routes>
             </main>
             <Footer />
