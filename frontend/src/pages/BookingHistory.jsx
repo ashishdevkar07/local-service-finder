@@ -19,7 +19,7 @@ function BookingHistory() {
         fetch(`${API_URL}/bookings/user?email=${encodeURIComponent(userEmail)}`)
             .then(res => res.json())
             .then(data => {
-                console.log("Booking data:" ,data)
+                console.log("Booking data:", data)
                 setBookings(data)
                 setLoading(false)
             })
@@ -69,7 +69,10 @@ function BookingHistory() {
                         <p>📍 Address: {booking.address}</p>
                         <p>📅 Date: {booking.date}</p>
                         <p>🕐 Time: {booking.time}</p>
-                        <p>🕐 Booked on: {new Date(booking.createdAt).toLocaleDateString()}</p>
+                        <p>📝 Booked on: {new Date(booking.createdAt).toLocaleDateString()}</p>
+                        <p style={{ color: booking.paymentStatus === "paid" ? "#2d8a4e" : "#dc3545", fontWeight: "600" }}>
+                            💳 Payment: {booking.paymentStatus === "paid" ? "✅ Paid" : "❌ Unpaid"}
+                        </p>
                     </div>
 
                     {booking.status === "completed" && !booking.isRated && (

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -14,6 +14,7 @@ import Admin from "./pages/Admin";
 import ServicemanRegister from "./pages/ServicemanRegister";
 import ServicemanLogin from "./pages/ServicemanLogin";
 import ServicemanDashboard from "./pages/ServicemanDashboard";
+import Payment from "./pages/Payment";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -31,7 +32,23 @@ function App() {
 
     return (
         <BrowserRouter>
-            <Navbar isLoggedIn={isLoggedIn} username={username} setIsLoggedIn={setIsLoggedIn} />
+            <AppContent
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                username={username}
+                setUsername={setUsername}
+            />
+        </BrowserRouter>
+    )
+}
+
+function AppContent({ isLoggedIn, setIsLoggedIn, username, setUsername }) {
+    const location = useLocation()
+    const hideNav = location.pathname === "/"
+
+    return (
+        <>
+            {!hideNav && <Navbar isLoggedIn={isLoggedIn} username={username} setIsLoggedIn={setIsLoggedIn} />}
             <main>
                 <Routes>
                     <Route path="/" element={<Landing />} />
@@ -41,6 +58,7 @@ function App() {
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/my-bookings" element={<BookingHistory />} />
+                    <Route path="/payment" element={<Payment />} />
                     <Route path="/admin-login" element={<AdminLogin />} />
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/serviceman-register" element={<ServicemanRegister />} />
@@ -48,8 +66,8 @@ function App() {
                     <Route path="/serviceman-dashboard" element={<ServicemanDashboard />} />
                 </Routes>
             </main>
-            <Footer />
-        </BrowserRouter>
+            {!hideNav && <Footer />}
+        </>
     )
 }
 

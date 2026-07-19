@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import API_URL from "../config"
 
 function Booking() {
@@ -11,6 +12,7 @@ function Booking() {
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+    const navigate = useNavigate()
 
     async function handleSubmit() {
         if (name === "" || phone === "" || address === "" || serviceType === "" || date === "" || time === "") {
@@ -34,6 +36,9 @@ function Booking() {
             const data = await response.json()
 
             if (response.ok) {
+                console.log("Booking data:", data)
+                console.log("Booking ID:", data.booking._id)
+                localStorage.setItem("lastBookingId", data.booking._id)
                 setSubmitted(true)
             } else {
                 setError(data.message)
@@ -60,16 +65,40 @@ function Booking() {
         return (
             <div className="booking-success">
                 <h2>Booking Confirmed! ✅</h2>
-                <p>Name : {name}</p>
-                <p>Phone : {phone}</p>
-                <p>Address :{address}</p>
-                <p>Service : {serviceType}</p>
-                <p>Date : {date}</p>
-                <p>Time : {time}</p>
-                <p style={{ color: "#1abc9c", fontWeight: "600" }}>
+                <p>Name: {name}</p>
+                <p>Phone: {phone}</p>
+                <p>Address: {address}</p>
+                <p>Service: {serviceType}</p>
+                <p>Date: {date}</p>
+                <p>Time: {time}</p>
+                <p style={{ color: "#2d8a4e", fontWeight: "600" }}>
                     Your booking has been saved successfully!
                 </p>
-                <button onClick={handleReset}>Book Another Services</button>
+
+                <button
+                    onClick={() => {
+                        localStorage.setItem("bookingService", serviceType)
+                        localStorage.setItem("bookingAmount", "299")
+                        navigate("/payment")
+                    }}
+                    style={{
+                        padding: "14px",
+                        background: "linear-gradient(135deg, #6F4E37, #C89B6D)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "12px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        fontFamily: "Poppins, sans-serif",
+                        width: "100%",
+                        marginBottom: "10px"
+                    }}
+                >
+                    💳 Proceed to Payment
+                </button>
+
+                <button onClick={handleReset}>Book Another Service</button>
             </div>
         )
     }
