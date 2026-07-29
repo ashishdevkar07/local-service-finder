@@ -17,7 +17,8 @@ const bookingSchema = new mongoose.Schema({
     time: { type: String, required: true },
     status: { type: String, default: "pending" },
     userEmail: { type: String, required: false },
-    israted: { type: Boolean, default: false }
+    israted: { type: Boolean, default: false },
+    paymentStatus: {type: String, default: "unpaid"}
 }, { timestamps: true })
 
 module.exports = mongoose.model("Booking", bookingSchema)

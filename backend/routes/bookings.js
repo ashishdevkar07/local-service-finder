@@ -72,4 +72,18 @@ router.get("/", async (req, res) => {
     }
 })
 
+// Update payment status
+router.put("/:id/payment", async (req, res) => {
+    try {
+        const booking = await Booking.findByIdAndUpdate(
+            req.params.id,
+            { paymentStatus: "paid" },
+            { new: true }
+        )
+        res.json({ message: "Payment updated", booking })
+    } catch (err) {
+        res.status(500).json({ message: "Server error" })
+    }
+})
+
 module.exports = router

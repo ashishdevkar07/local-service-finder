@@ -35,7 +35,6 @@ router.post("/login", async (req, res) => {
         const { email, password } = req.body
 
         const serviceman = await Serviceman.findOne({ email })
-        console.log("Found serviceman", serviceman)
         if (!serviceman) {
             return res.status(400).json({ message: "Invalid credentials" })
         }
