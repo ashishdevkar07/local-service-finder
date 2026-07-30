@@ -35,7 +35,7 @@ function Admin() {
 
     useEffect(() => {
         // Fetch all bookings
-        fetch(`${API_URL}/bookings`)
+        fetch(`${API_URL}/api/bookings`)
             .then(res => res.json())
             .then(data => setBookings(data))
             .catch(err => console.log(err))
@@ -50,7 +50,7 @@ function Admin() {
 
     async function updateBookingStatus(bookingId, newStatus) {
         try {
-            const response = await fetch(`${API_URL}/bookings/${bookingId}/status`, {
+            const response = await fetch(`${API_URL}/api/bookings/${bookingId}/status`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: newStatus })
@@ -67,7 +67,7 @@ function Admin() {
 
     async function updateServicemanStatus(id, newStatus) {
         try {
-            const response = await fetch(`${API_URL}/serviceman/${id}/${newStatus}`, {
+            const response = await fetch(`${API_URL}/api/serviceman/${id}/${newStatus}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" }
             })
