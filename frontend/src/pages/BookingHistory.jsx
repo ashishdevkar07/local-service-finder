@@ -16,7 +16,7 @@ function BookingHistory() {
             return
         }
 
-        fetch(`${API_URL}/bookings/user?email=${encodeURIComponent(userEmail)}`)
+        fetch(`${API_URL}/api/bookings/user?email=${encodeURIComponent(userEmail)}`)
             .then(res => res.json())
             .then(data => {
                 console.log("Booking data:", data)
