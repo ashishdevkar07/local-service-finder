@@ -34,7 +34,7 @@ function BookingHistory() {
             b._id === bookingId ? { ...b, isRated: true } : b
         ))
 
-        fetch(`${API_URL}/bookings//${bookingId}/rated`, {
+        fetch(`${API_URL}/api/bookings//${bookingId}/rated`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" }
         })

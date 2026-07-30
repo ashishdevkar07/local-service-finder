@@ -26,7 +26,7 @@ function ServicemanRegister() {
             setLoading(true)
             setError("")
 
-            const response = await fetch(`${API_URL}/serviceman/register`, {
+            const response = await fetch(`${API_URL}/api/serviceman/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password, phone, category, experience, area, price: Number(price) })

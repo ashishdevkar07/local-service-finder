@@ -18,7 +18,7 @@ function ServicemanLogin() {
             setLoading(true)
             setError("")
 
-            const response = await fetch(`${API_URL}/serviceman/login`, {
+            const response = await fetch(`${API_URL}/api/serviceman/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })

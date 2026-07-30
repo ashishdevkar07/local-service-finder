@@ -10,7 +10,7 @@ function Services() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch(`${API_URL}/providers`)
+        fetch(`${API_URL}/api/providers`)
             .then(res => res.json())
             .then(data => {
                 setProviders(data)

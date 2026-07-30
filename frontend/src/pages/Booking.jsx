@@ -25,7 +25,7 @@ function Booking() {
 
             const userEmail = localStorage.getItem("userEmail") || ""
 
-            const response = await fetch(`${API_URL}/bookings`, {
+            const response = await fetch(`${API_URL}/api/bookings`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
