@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import API_URL from "../config";
 
 function Payment() {
     const [cardName, setCardName] = useState("")
@@ -72,7 +73,7 @@ function Payment() {
             // Save payment to database
             const bookingId = localStorage.getItem("lastBookingId")
             if (bookingId) {
-                await fetch(`http://localhost:5000/api/bookings/${bookingId}/payment`, {
+                await fetch(`${API_URL}/api/bookings/${bookingId}/payment`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" }
                 })
