@@ -41,7 +41,7 @@ function Admin() {
             .catch(err => console.log(err))
 
         // Fetch all servicemen
-        fetch(`${API_URL}/serviceman`)
+        fetch(`${API_URL}/api/serviceman`)
             .then(res => res.json())
             .then(data => setServicemen(data))
             .catch(err => console.log(err))
