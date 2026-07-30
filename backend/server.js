@@ -20,7 +20,7 @@ const app = express()
 
 // Middleware
 app.use(cors({
-    origin: 'https://local-service-finder-two.vercel.app/',
+    origin: 'https://local-service-finder-two.vercel.app',
     credentials: true
 }));
 app.use(express.json())
